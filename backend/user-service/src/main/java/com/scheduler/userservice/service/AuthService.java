@@ -52,7 +52,7 @@ public class AuthService {
             throw new RuntimeException("Username is already taken!");
         }
 
-        if (userRepository.findByUsername(signUpRequest.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
             throw new RuntimeException("Email Address already in use!");
         }
 
