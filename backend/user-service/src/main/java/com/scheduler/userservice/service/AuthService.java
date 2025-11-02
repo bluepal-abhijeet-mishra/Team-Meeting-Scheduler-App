@@ -2,6 +2,7 @@ package com.scheduler.userservice.service;
 
 import com.scheduler.userservice.dto.LoginRequest;
 import com.scheduler.userservice.dto.SignUpRequest;
+import com.scheduler.userservice.exception.UserAlreadyExistException;
 import com.scheduler.userservice.model.Role;
 import com.scheduler.userservice.model.User;
 import com.scheduler.userservice.repository.RoleRepository;
@@ -49,11 +50,11 @@ public class AuthService {
 
     public User registerUser(SignUpRequest signUpRequest) {
         if (userRepository.findByUsername(signUpRequest.getUsername()).isPresent()) {
-            throw new RuntimeException("Username is already taken!");
+            throw new UserAlreadyExistException("Username is already taken!");
         }
 
         if (userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
-            throw new RuntimeException("Email Address already in use!");
+            throw new UserAlreadyExistException("Email Address already in use!");
         }
 
         User user = new User();

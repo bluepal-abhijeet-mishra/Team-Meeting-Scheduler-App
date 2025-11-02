@@ -7,24 +7,31 @@ import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import MeetingsPage from './pages/MeetingsPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import DashboardPage from './pages/DashboardPage';
+import CreateMeetingPage from './pages/CreateMeetingPage';
+import { Container, Box } from '@mui/material';
+import { SnackbarProvider } from 'notistack';
 
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <Header />
-        <main className="py-3">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/meetings" element={<MeetingsPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </Router>
+      <SnackbarProvider maxSnack={3}>
+        <Router>
+          <Header />
+          <Container>
+            <Box sx={{ my: 2 }}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/create-meeting" element={<CreateMeetingPage />} />
+              </Routes>
+            </Box>
+          </Container>
+          <Footer />
+        </Router>
+      </SnackbarProvider>
     </Provider>
   );
 }
