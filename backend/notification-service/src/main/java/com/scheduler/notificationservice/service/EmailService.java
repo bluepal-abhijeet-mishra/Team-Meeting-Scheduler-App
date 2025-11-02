@@ -12,16 +12,21 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
+    /**
+     * Send meeting invitation.
+     *
+     * @param meeting the meeting
+     */
     public void sendMeetingInvitation(MeetingResponse meeting) {
         for (String participant : meeting.getParticipants()) {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(participant);
             message.setSubject("Meeting Invitation: " + meeting.getTitle());
-            message.setText("You have been invited to a meeting.\n\n" +
-                    "Title: " + meeting.getTitle() + "\n" +
-                    "Description: " + meeting.getDescription() + "\n" +
-                    "Start Time: " + meeting.getStartTime() + "\n" +
-                    "End Time: " + meeting.getEndTime());
+            message.setText("You have been invited to a meeting.\n\n"
+                    + "Title: " + meeting.getTitle() + "\n"
+                    + "Description: " + meeting.getDescription() + "\n"
+                    + "Start Time: " + meeting.getStartTime() + "\n"
+                    + "End Time: " + meeting.getEndTime());
             mailSender.send(message);
         }
     }

@@ -1,5 +1,12 @@
 import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Container,
+  Box,
+} from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../../store/authSlice';
@@ -16,37 +23,36 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
-          <Navbar.Brand as={Link} to="/">
-            Team Meeting Scheduler
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              {user ? (
-                <>
-                  <Nav.Link as={Link} to="/meetings">
-                    Meetings
-                  </Nav.Link>
-                  <Nav.Link onClick={onLogout}>Logout</Nav.Link>
-                </>
-              ) : (
-                <>
-                  <Nav.Link as={Link} to="/login">
-                    Login
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/register">
-                    Register
-                  </Nav.Link>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </header>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+              Team Meeting Scheduler
+            </Link>
+          </Typography>
+          {user ? (
+            <>
+              <Button color="inherit" component={Link} to="/meetings">
+                Meetings
+              </Button>
+              <Button color="inherit" onClick={onLogout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button color="inherit" component={Link} to="/login">
+                Login
+              </Button>
+              <Button color="inherit" component={Link} to="/register">
+                Register
+              </Button>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
 

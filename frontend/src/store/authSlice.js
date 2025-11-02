@@ -14,13 +14,16 @@ export const register = createAsyncThunk(
   }
 );
 
-export const login = createAsyncThunk('auth/login', async (userData, thunkAPI) => {
-  try {
-    return await authService.login(userData);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data);
+export const login = createAsyncThunk(
+  'auth/login',
+  async (userData, thunkAPI) => {
+    try {
+      return await authService.login(userData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logout();
